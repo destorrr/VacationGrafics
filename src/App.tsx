@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dashboard } from './components/Dashboard';
 import { EmployeeSchedule } from './components/EmployeeSchedule';
-import { VacationCalendar } from './components/VacationCalendar';
+
 import { ExportView } from './components/ExportView';
 import {
   organizations,
@@ -11,7 +11,7 @@ import {
 } from './data';
 import { Campaign, VacationPeriod } from './types';
 
-type TabId = 'dashboard' | 'schedule' | 'calendar' | 'export';
+type TabId = 'dashboard' | 'schedule' | 'export';
 
 interface Tab {
   id: TabId;
@@ -22,7 +22,6 @@ interface Tab {
 const tabs: Tab[] = [
   { id: 'dashboard', label: 'Панель управления', icon: 'fas fa-tachometer-alt' },
   { id: 'schedule', label: 'Планирование', icon: 'fas fa-user-clock' },
-  { id: 'calendar', label: 'Календарь', icon: 'fas fa-calendar-alt' },
   { id: 'export', label: 'Экспорт Т-7', icon: 'fas fa-file-excel' },
 ];
 
@@ -162,14 +161,7 @@ function App() {
               onDeletePeriod={handleDeletePeriod}
             />
           )}
-          {activeTab === 'calendar' && (
-            <VacationCalendar
-              employees={employees}
-              vacationPeriods={periods}
-              organizations={organizations}
-              selectedCampaignId={selectedCampaign?.id || 'camp-2026'}
-            />
-          )}
+
           {activeTab === 'export' && (
             <ExportView
               campaigns={campaigns}
